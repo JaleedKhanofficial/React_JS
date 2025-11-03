@@ -1,12 +1,35 @@
 import { useState } from 'react'
 import './App.css'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import Layout from './Layout'
+import Home from './components/Home/Home'
+import About from './components/About/About'
+import Contact from './components/Contact/Contact'
+import User from './components/User/User'
+import GitHub, { gitHubInfoLoader } from './components/GitHub/GitHub'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<Layout />}>
+        <Route path='' element={<Home />} />
+        <Route path='about' element = {<About />} />
+        <Route path='contact' element = {<Contact /> } />
+        <Route path='user/:userID' element = {<User /> } /> 
+        <Route
+        loader={gitHubInfoLoader}
+        path = 'github' element ={<GitHub />} />
+
+
+      </Route>
+    )
+  )
+
   return (
     <>
-    <h1>Jaleed khan</h1>
+    <RouterProvider router={router} />
     </>
   )
 }
