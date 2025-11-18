@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import './App.css'
 import { ThemeProvider } from './contexts/theme'
 import ThemeBtn from './components/ThemeBtn'
 import Card from './components/Card'
+import './index.css';
 
 function App() {
   const [themeMode, setThemeMode] = useState("light")
@@ -20,6 +21,11 @@ function App() {
   //   document.querySelector('html').classList.add(themeMode)
   // },[themeMode])
 
+  useEffect(() => {
+  const html = document.querySelector("html");
+  html.classList.remove("light", "dark");
+  html.classList.add(themeMode);
+}, [themeMode]);
 
 
 
